@@ -3,11 +3,6 @@
 #include <iostream>
 #include "SDL2/SDL.h"
 
-
-
-
-
-
 const int fps = 60;
 const int frameDelay = 1000 / fps;
 
