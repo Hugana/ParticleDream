@@ -1,5 +1,6 @@
+#pragma once
+
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
 #include "Vector2D.h"
 
@@ -13,6 +14,8 @@ class Particle {
         void move(Vector2D dir);
 
         void draw();
+
+        void update();
 
         static SDL_Texture* loadTexture();
 
