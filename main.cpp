@@ -17,11 +17,17 @@ int main( int argc, char * argv[] )
 
     System* system = new System();
     
-    system->init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, false);
+    system->init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, true);
 
 
-    while(true){
+    while(system->running()){
         frameStart = SDL_GetTicks();
+
+        system->update();
+        system->render();
+        system->handleEvents();
+
+        
 
         frameTime = SDL_GetTicks() - frameStart;
 
@@ -29,6 +35,8 @@ int main( int argc, char * argv[] )
             SDL_Delay(frameDelay - frameTime);
         }
     }
+
+    system->clean();
 
     return 0;
 }

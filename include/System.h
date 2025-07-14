@@ -15,10 +15,8 @@ class System{
         void render();
         void clean();
         bool running();
-
+        void handleEvents();
         static SDL_Renderer* renderer;
-
-
 
     private:
         bool isRunning;

@@ -17,9 +17,10 @@ class Particle {
 
         void update();
 
-        static SDL_Texture* loadTexture();
+        
+        static void loadTexture();
+        static SDL_Texture* texture;
 
-        SDL_Texture* texture;
         Vector2D pos;
         float size, r, g, b;
         SDL_Rect srcRect, destRect;
