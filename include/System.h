@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "Particle.h"
-
+#include "PerlinGrid.h"
 class System{
 
     public:
@@ -21,6 +21,7 @@ class System{
     private:
         bool isRunning;
         std::vector<Particle> particleVector;
+        PerlinGrid grid;
         
         SDL_Window* window;
 };

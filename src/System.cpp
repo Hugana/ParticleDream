@@ -35,6 +35,12 @@ void System::init(const char* title, int xpos, int ypos, int width, int height, 
 
         isRunning = true;
 
+        int width, height;
+        SDL_GetWindowSize(window, &width, &height);
+
+        grid = PerlinGrid();
+        grid.init(width, height,0.003,4);
+
         Particle::loadTexture();
         //SDL_SetTextureColorMod(Particle::texture, 255, 0, 0);
         Particle p = Particle(Vector2D(100, 100), 1.0f, 1.0f, 0.0f, 0.0f, 0, 0, 32, 32);
@@ -48,13 +54,16 @@ void System::init(const char* title, int xpos, int ypos, int width, int height, 
 }
 
 void System::update() {
+    grid.update();
     for (Particle& p : particleVector) {
+        Vector2D pos = p.getPosition();
+        p.move(grid.getValueAtPosition(pos.getX(), pos.getY()));
         p.update();
     }
 }
 
 void System::render() {
-    SDL_RenderClear(renderer);
+    //SDL_RenderClear(renderer);
     for (Particle& p : particleVector) {
         p.draw();
     }

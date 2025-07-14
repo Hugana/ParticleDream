@@ -34,6 +34,10 @@ void Particle::update(){
     destRect.h = srcRect.h * 0.3;
 }
 
+Vector2D Particle::getPosition(){
+    return pos;
+}
+
 void Particle::loadTexture() {
     if (texture) return; 
 

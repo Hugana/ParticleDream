@@ -17,6 +17,8 @@ class Particle {
 
         void update();
 
+        Vector2D getPosition();
+
         
         static void loadTexture();
         static SDL_Texture* texture;
