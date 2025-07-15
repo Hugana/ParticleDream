@@ -28,10 +28,11 @@ void Particle::draw(){
 }
 
 void Particle::update(){
-    destRect.x = pos.getX();
-    destRect.y = pos.getY();
-    destRect.w = srcRect.w * 0.3;
-    destRect.h = srcRect.h * 0.3;
+    destRect.x = static_cast<int>(std::round(pos.getX()));
+    destRect.y = static_cast<int>(std::round(pos.getY()));
+    destRect.w = srcRect.w;  
+    destRect.h = srcRect.h;
+
 }
 
 Vector2D Particle::getPosition(){
@@ -41,7 +42,7 @@ Vector2D Particle::getPosition(){
 void Particle::loadTexture() {
     if (texture) return; 
 
-    SDL_Surface* tmpSurface = IMG_Load("assets/particle.png");
+    SDL_Surface* tmpSurface = IMG_Load("assets/particle_very_small.png");
     if (!tmpSurface) {
         std::cerr << "IMG_Load failed: " << IMG_GetError() << "\n";
         return;

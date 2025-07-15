@@ -1,6 +1,7 @@
 #include "../include/Particle.h"
 #include "../include/System.h"
 #include <SDL2/SDL_image.h>
+#include "../include/pcg_random.hpp"
 
 SDL_Renderer* System::renderer = nullptr;
 
@@ -39,14 +40,31 @@ void System::init(const char* title, int xpos, int ypos, int width, int height, 
         SDL_GetWindowSize(window, &width, &height);
 
         grid = PerlinGrid();
-        grid.init(width, height,0.003,4);
+        grid.init(width, height,0.05,3);
 
         Particle::loadTexture();
-        //SDL_SetTextureColorMod(Particle::texture, 255, 0, 0);
-        Particle p = Particle(Vector2D(100, 100), 1.0f, 1.0f, 0.0f, 0.0f, 0, 0, 32, 32);
-        
 
-        particleVector.push_back(p);
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0"); // Nearest (pixelated)
+
+        pcg32 rng; 
+
+        uint32_t value = rng(); 
+
+        std::uniform_int_distribution<int> distX(0, width);
+        std::uniform_int_distribution<int> distY(0, height);
+
+
+       
+        for (int nParticles = 0; nParticles < 20; nParticles++){
+            int x = distX(rng);
+            int y = distY(rng);
+
+            Particle p = Particle(Vector2D(x, y), 1.0f, 1.0f, 0.0f, 0.0f, 0, 0, 4,4);
+            particleVector.push_back(p);
+        
+        }
+
+        //SDL_SetTextureColorMod(Particle::texture, 255, 0, 0);
         
     } else {
         isRunning = false;
@@ -57,8 +75,9 @@ void System::update() {
     grid.update();
     for (Particle& p : particleVector) {
         Vector2D pos = p.getPosition();
-        p.move(grid.getValueAtPosition(pos.getX(), pos.getY()));
         p.update();
+        p.move(grid.getValueAtPosition(pos.getX(), pos.getY()));
+        
     }
 }
 

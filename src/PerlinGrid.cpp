@@ -21,7 +21,7 @@ void PerlinGrid::init(int width, int height, float increment, int magnitude ){
 
     grid.resize(rows, std::vector<Vector2D>(cols, Vector2D(0.0f, 0.0f)));
     noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
-    noise.SetFrequency(0.5);
+    noise.SetFrequency(0.4);
 }
 
 void PerlinGrid::update() {
@@ -29,8 +29,8 @@ void PerlinGrid::update() {
     for (int y = 0; y < rows; y++) {
         float xoff = 0;
         for (int x = 0; x < cols; x++) {
-            float angle = noise.GetNoise(xoff, yoff, zoff) * M_2_PI * 4; 
-            Vector2D vector = Vector2D(cos(angle) * mag, sin(angle) * mag);
+            float angle = noise.GetNoise(xoff, yoff, zoff) * M_PI * 2.0f;
+            Vector2D vector = Vector2D(std::cos(angle) * mag, std::sin(angle) * mag);
             grid[y][x] = vector;
 
             xoff += inc;

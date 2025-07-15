@@ -16,7 +16,7 @@ class Particle {
         void draw();
 
         void update();
-
+        Vector2D previousPos;
         Vector2D getPosition();
 
         
