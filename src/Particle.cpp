@@ -19,7 +19,7 @@ Particle::Particle(Vector2D posVector, float particleSize, float red, float gree
 
 Particle::~Particle() {}
 
-void Particle::move(Vector2D dir){
+void Particle::move(Vector2D dir){    
     pos += dir;
 };
 
@@ -28,21 +28,40 @@ void Particle::draw(){
 }
 
 void Particle::update(){
-    destRect.x = static_cast<int>(std::round(pos.getX()));
-    destRect.y = static_cast<int>(std::round(pos.getY()));
+    destRect.x = pos.getX();
+    destRect.y = pos.getY();
     destRect.w = srcRect.w;  
     destRect.h = srcRect.h;
-
 }
 
 Vector2D Particle::getPosition(){
     return pos;
 }
 
+void Particle::wrapAround(int width, int height) {
+    float x = pos.getX();
+    float y = pos.getY();
+
+    if (x < 0){
+        x += width;
+    }else if (x >= width){
+         x -= width;
+    } 
+    
+    if (y < 0) {
+        y += height;
+    }
+    else if (y >= height){
+        y -= height;
+    }
+
+    pos = Vector2D(x, y);
+}
+
 void Particle::loadTexture() {
     if (texture) return; 
 
-    SDL_Surface* tmpSurface = IMG_Load("assets/particle_very_small.png");
+    SDL_Surface* tmpSurface = IMG_Load("assets/particle_2x2.png");
     if (!tmpSurface) {
         std::cerr << "IMG_Load failed: " << IMG_GetError() << "\n";
         return;

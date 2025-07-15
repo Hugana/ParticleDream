@@ -1,9 +1,11 @@
 #include "../include/Particle.h"
 #include "../include/System.h"
 #include <SDL2/SDL_image.h>
+#include <random>
 #include "../include/pcg_random.hpp"
 
 SDL_Renderer* System::renderer = nullptr;
+
 
 System::System() {}
 
@@ -30,41 +32,33 @@ void System::init(const char* title, int xpos, int ypos, int width, int height, 
             return;
         }
 
-        int w, h;
-        SDL_GetWindowSize(window, &w, &h);
-        std::cout << "Window size: " << w << "x" << h << "\n";
-
         isRunning = true;
 
-        int width, height;
-        SDL_GetWindowSize(window, &width, &height);
-
+        SDL_GetWindowSize(window, &screenWidth, &screenHeight);
         grid = PerlinGrid();
-        grid.init(width, height,0.05,3);
+        grid.init(screenWidth, screenHeight, 0.08f, 3.0f);
 
         Particle::loadTexture();
 
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0"); // Nearest (pixelated)
 
-        pcg32 rng; 
+        pcg_extras::seed_seq_from<std::random_device> seed_src;
+        pcg32 rng(seed_src); // This will give a new seed on every run
+ 
 
-        uint32_t value = rng(); 
+        std::uniform_int_distribution<int> distX(0, screenWidth - 1);
+        std::uniform_int_distribution<int> distY(0, screenHeight - 1);
 
-        std::uniform_int_distribution<int> distX(0, width);
-        std::uniform_int_distribution<int> distY(0, height);
-
-
-       
-        for (int nParticles = 0; nParticles < 20; nParticles++){
+        for (int nParticles = 0; nParticles < 200; ++nParticles) {
             int x = distX(rng);
             int y = distY(rng);
 
-            Particle p = Particle(Vector2D(x, y), 1.0f, 1.0f, 0.0f, 0.0f, 0, 0, 4,4);
+            Particle p(Vector2D(x, y), 1.0f, 1.0f, 0.0f, 0.0f, 0, 0, 2, 2);
             particleVector.push_back(p);
-        
         }
 
-        //SDL_SetTextureColorMod(Particle::texture, 255, 0, 0);
+        SDL_SetTextureColorMod(Particle::texture, 255, 0, 0);
+        SDL_SetTextureAlphaMod(Particle::texture, 30);
         
     } else {
         isRunning = false;
@@ -77,6 +71,7 @@ void System::update() {
         Vector2D pos = p.getPosition();
         p.update();
         p.move(grid.getValueAtPosition(pos.getX(), pos.getY()));
+        p.wrapAround(screenWidth, screenHeight);
         
     }
 }

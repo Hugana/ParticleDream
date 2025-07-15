@@ -3,7 +3,7 @@
 class Vector2D
 {
     public:
-        Vector2D(int x_cord = 0, int y_cord = 0)
+        Vector2D(float x_cord = 0, float y_cord = 0)
         {
             x = x_cord;
             y = y_cord;

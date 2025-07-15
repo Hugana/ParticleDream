@@ -19,6 +19,7 @@ class System{
         static SDL_Renderer* renderer;
 
     private:
+        int screenWidth, screenHeight;
         bool isRunning;
         std::vector<Particle> particleVector;
         PerlinGrid grid;

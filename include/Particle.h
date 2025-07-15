@@ -16,6 +16,8 @@ class Particle {
         void draw();
 
         void update();
+
+        void wrapAround(int width, int height);
         Vector2D previousPos;
         Vector2D getPosition();
 
