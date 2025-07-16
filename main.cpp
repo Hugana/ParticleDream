@@ -17,7 +17,7 @@ int main( int argc, char * argv[] )
 
     System* system = new System();
     
-    system->init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, true);
+    system->init("Particle Dream", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, true);
 
 
     while(system->running()){
@@ -26,8 +26,6 @@ int main( int argc, char * argv[] )
         system->update();
         system->render();
         system->handleEvents();
-
-        
 
         frameTime = SDL_GetTicks() - frameStart;
 

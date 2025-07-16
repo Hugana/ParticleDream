@@ -1,6 +1,5 @@
 #include "../include/PerlinGrid.h"
 #include "../include/pcg_random.hpp"
-#include <numbers>
 #include <cmath>
 #include "../include/Vector2D.h"
 #include <random>
@@ -10,7 +9,7 @@ PerlinGrid::PerlinGrid(){};
 PerlinGrid::~PerlinGrid(){};
 
 void PerlinGrid::init(int width, int height, float increment, float magnitude ){
-    scale = 10;
+    scale = 20;
     rows = (height / scale);
     cols = (width / scale);
     inc = increment;
@@ -37,7 +36,7 @@ void PerlinGrid::update() {
     for (int y = 0; y < rows; y++) {
         float xoff = 0;
         for (int x = 0; x < cols; x++) {
-            float angle = noise.GetNoise(xoff, yoff, zoff) * M_PI;
+            float angle = noise.GetNoise(xoff, yoff, zoff) * 2 * M_PI;
             Vector2D vector = Vector2D(std::cos(angle) * mag, std::sin(angle) * mag);
             grid[y][x] = vector;
 
@@ -46,7 +45,7 @@ void PerlinGrid::update() {
         yoff += inc;
     }
 
-    zoff += 0.008f; 
+    zoff += 0.003f; 
 }
 
 

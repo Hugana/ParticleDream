@@ -15,5 +15,4 @@ class PerlinGrid{
         int scale, rows, cols, mag;
         std::vector<std::vector<Vector2D>> grid;
         float inc, zoff, yoff, xoff;
-
 };

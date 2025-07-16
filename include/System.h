@@ -6,7 +6,6 @@
 #include "Particle.h"
 #include "PerlinGrid.h"
 class System{
-
     public:
         System();
         ~System();
@@ -17,12 +16,10 @@ class System{
         bool running();
         void handleEvents();
         static SDL_Renderer* renderer;
-
     private:
         int screenWidth, screenHeight;
         bool isRunning;
         std::vector<Particle> particleVector;
         PerlinGrid grid;
-        
         SDL_Window* window;
 };

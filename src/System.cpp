@@ -57,7 +57,7 @@ void System::init(const char* title, int xpos, int ypos, int width, int height, 
             particleVector.push_back(p);
         }
 
-        SDL_SetTextureColorMod(Particle::texture, 255, 0, 0);
+        SDL_SetTextureColorMod(Particle::texture, 255, 140,0);
         SDL_SetTextureAlphaMod(Particle::texture, 30);
         
     } else {
