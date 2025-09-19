@@ -20,14 +20,13 @@ void PerlinGrid::init(int width, int height, float increment, float magnitude ){
     xoff = 0;
 
     grid.resize(rows, std::vector<Vector2D>(cols, Vector2D(0.0f, 0.0f)));
-
-
+ 
     pcg_extras::seed_seq_from<std::random_device> seed_src;
     pcg32 rng(seed_src);
     uint32_t value = rng();
     noise.SetSeed(value);
     noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
-    noise.SetFractalOctaves(4);
+    noise.SetFractalOctaves(2);
     noise.SetFrequency(0.25);
 }
 
@@ -45,7 +44,7 @@ void PerlinGrid::update() {
         yoff += inc;
     }
 
-    zoff += 0.003f; 
+    zoff += 0.008f; 
 }
 
 

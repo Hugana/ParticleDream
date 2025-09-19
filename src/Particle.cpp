@@ -1,5 +1,6 @@
 #include "../include/Particle.h"
 #include "../include/System.h"
+#include "../include/ColorUtils.h"
 #include <SDL2/SDL_image.h>
 
 SDL_Texture* Particle::texture = nullptr;
@@ -15,6 +16,14 @@ Particle::Particle(Vector2D posVector, float particleSize, float red, float gree
     srcRect.y = srcY;
     srcRect.w = srcW;
     srcRect.h = srcH;
+
+    baseColor = { static_cast<Uint8>(0),
+              static_cast<Uint8>(255),
+              static_cast<Uint8>(130),
+              255 };
+
+    targetColor = { 0, 0, 255, 255 }; // or pick anything, e.g. a rainbow target
+
 }
 
 Particle::~Particle() {}
@@ -24,6 +33,8 @@ void Particle::move(Vector2D dir){
 };
 
 void Particle::draw(){
+    SDL_Color modColor = ColorUtils::oscillateColor(baseColor, targetColor, 2.0f);
+    SDL_SetTextureColorMod(texture, modColor.r, modColor.g, modColor.b);
     SDL_RenderCopy(System::renderer, texture, &srcRect, &destRect);
 }
 

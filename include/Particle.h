@@ -17,6 +17,8 @@ class Particle {
         static void loadTexture();
         static SDL_Texture* texture;
     private:
+        SDL_Color baseColor;
+        SDL_Color targetColor;
         Vector2D pos;
         float size, r, g, b;
         SDL_Rect srcRect, destRect;

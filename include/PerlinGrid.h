@@ -4,7 +4,6 @@
 #include "Vector2D.h"
 
 class PerlinGrid{
-
     public:
         PerlinGrid();
         ~PerlinGrid();
