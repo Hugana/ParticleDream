@@ -1,10 +1,11 @@
+#include <SDL2/SDL_video.h>
 #include <exception>
 #include <string>
 #include <iostream>
 #include "SDL2/SDL.h"
 #include "include/System.h"
 
-const int fps = 60;
+const int fps = 90;
 const int frameDelay = 1000 / fps;
 
 
@@ -17,7 +18,7 @@ int main( int argc, char * argv[] )
 
     System* system = new System();
     
-    system->init("Particle Dream", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, true);
+    system->init("Particle Dream", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, false);
 
 
     while(system->running()){

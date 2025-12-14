@@ -19,6 +19,8 @@ void PerlinGrid::init(int width, int height, float increment, float magnitude ){
     yoff = 0;
     xoff = 0;
 
+    std::cout << "DEBUG: Perlin Grid Magnitude set to: " << mag << "\n";
+
     grid.resize(rows, std::vector<Vector2D>(cols, Vector2D(0.0f, 0.0f)));
  
     pcg_extras::seed_seq_from<std::random_device> seed_src;

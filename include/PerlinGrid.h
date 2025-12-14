@@ -11,7 +11,7 @@ class PerlinGrid{
         void update();
         Vector2D getValueAtPosition(float x, float y);
         FastNoiseLite noise;
-        int scale, rows, cols, mag;
+        int scale, rows, cols;
         std::vector<std::vector<Vector2D>> grid;
-        float inc, zoff, yoff, xoff;
+        float inc, zoff, yoff, xoff, mag;
 };

@@ -20,9 +20,10 @@ void System::init(const char* title, int xpos, int ypos, int width, int height, 
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
         if (window) std::cout << "Window created.\n";
 
-        renderer = SDL_CreateRenderer(window, -1, 0);
+        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+
         if (renderer) {
-            SDL_SetRenderDrawColor(renderer, 10, 10, 10, 255);
+            SDL_SetRenderDrawColor(renderer, 10, 10, 10, 255); 
             std::cout << "Renderer created.\n";
         }
 
@@ -36,14 +37,14 @@ void System::init(const char* title, int xpos, int ypos, int width, int height, 
 
         SDL_GetWindowSize(window, &screenWidth, &screenHeight);
         grid = PerlinGrid();
-        grid.init(screenWidth, screenHeight, 0.08f, 3.0f);
+        grid.init(screenWidth, screenHeight, 0.08f, 1.8f);
 
         Particle::loadTexture();
 
-        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0"); // Nearest (pixelated)
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0"); 
 
         pcg_extras::seed_seq_from<std::random_device> seed_src;
-        pcg32 rng(seed_src); // This will give a new seed on every run
+        pcg32 rng(seed_src); 
  
 
         std::uniform_int_distribution<int> distX(0, screenWidth - 1);
