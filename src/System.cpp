@@ -37,7 +37,7 @@ void System::init(const char* title, int xpos, int ypos, int width, int height, 
 
         SDL_GetWindowSize(window, &screenWidth, &screenHeight);
         grid = PerlinGrid();
-        grid.init(screenWidth, screenHeight, 0.08f, 1.8f);
+        grid.init(screenWidth, screenHeight, 0.08f, 1.0f);
 
         Particle::loadTexture();
 
@@ -54,7 +54,7 @@ void System::init(const char* title, int xpos, int ypos, int width, int height, 
             int x = distX(rng);
             int y = distY(rng);
 
-            Particle p(Vector2D(x, y), 1.0f, 1.0f, 0.0f, 0.0f, 0, 0, 2, 2);
+            Particle p(Vector2D(x, y), 1.0f, 1.0f, 0.0f, 0.0f, 0, 0, 1, 1);
             particleVector.push_back(p);
         }
 

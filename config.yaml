@@ -1,0 +1,15 @@
+window:
+  title: "Particle Dream"
+  width: 1280
+  height: 720
+  fullscreen: false
+
+particles:
+  size: 2 
+  count: 200
+
+grid:
+  zoffInc: 0.00
+  yoffInc: 0.00
+  xoffInc: 0.00
+  magnitude: 1.0

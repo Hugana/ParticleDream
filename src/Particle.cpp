@@ -22,8 +22,7 @@ Particle::Particle(Vector2D posVector, float particleSize, float red, float gree
               static_cast<Uint8>(130),
               255 };
 
-    targetColor = { 0, 0, 255, 255 }; // or pick anything, e.g. a rainbow target
-
+    targetColor = { 0, 0, 255, 255 }; 
 }
 
 Particle::~Particle() {}
@@ -33,7 +32,7 @@ void Particle::move(Vector2D dir){
 };
 
 void Particle::draw(){
-    SDL_Color modColor = ColorUtils::oscillateColor(baseColor, targetColor, 2.0f);
+    SDL_Color modColor = ColorUtils::oscillateColor(baseColor, targetColor, 0.5f);
     SDL_SetTextureColorMod(texture, modColor.r, modColor.g, modColor.b);
     SDL_RenderCopy(System::renderer, texture, &srcRect, &destRect);
 }
