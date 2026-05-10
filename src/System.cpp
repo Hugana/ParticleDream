@@ -17,6 +17,10 @@ void System::init(const char* title, int xpos, int ypos, int width, int height, 
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         std::cout << "Subsystems Initialized.\n";
 
+#ifdef SDL_HINT_VIDEO_X11_WMCLASS
+        SDL_SetHint(SDL_HINT_VIDEO_X11_WMCLASS, "particledream");
+#endif
+
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
         if (window) std::cout << "Window created.\n";
 
